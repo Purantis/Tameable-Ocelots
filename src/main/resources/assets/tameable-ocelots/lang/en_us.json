@@ -1,0 +1,28 @@
+{
+  "tameable-ocelots.config.ocelotTamingItems": "Ocelot Taming Items",
+  "tameable-ocelots.config.ocelotTamingItems.desc": "Change or add the items required to tame a ocelot.",
+
+  "tameable-ocelots.config.ocelotBreedingItems": "Ocelot Breeding Items",
+  "tameable-ocelots.config.ocelotBreedingItems.desc": "Change or add the items required to breed a ocelot.",
+
+  "tameable-ocelots.config.ocelotsAttackWithOwner": "Ocelots Attack with Owner",
+  "tameable-ocelots.config.ocelotsAttackWithOwner.desc": "If true, ocelots will attack the mobs owner hits.",
+
+  "tameable-ocelots.config.ocelotsTameDirectly": "Ocelots Tame Directly",
+  "tameable-ocelots.config.ocelotsTameDirectly.desc": "If false, ocelots can only be tamed by breeding them.",
+
+  "tameable-ocelots.config.ocelotsTamingChance": "Ocelots Taming Chance",
+  "tameable-ocelots.config.ocelotsTamingChance.desc": "0 = Untameable\n1 = Instant Tame",
+
+  "tameable-ocelots.config.ocelotsCanIgnoreMobGriefingRule": "Ocelots Ignore mobGriefing Gamerule",
+  "tameable-ocelots.config.ocelotsCanIgnoreMobGriefingRule.desc": "If true, ocelots will still pick items even if /gamerule mobGriefing set to false.",
+
+  "tameable-ocelots.config.ocelotsTrustOnBorn": "Ocelots Trust on Born",
+  "tameable-ocelots.config.ocelotsTrustOnBorn.desc": "If true, when two ocelots are bred, the baby will directly trust you and be tamed.",
+
+  "tameable-ocelots.config.untamedocelotsCanBeTempted": "Untamed Ocelots Can Be Tempted",
+  "tameable-ocelots.config.untamedocelotsCanBeTempted.desc": "If true, untamed ocelots will follow you when you hold taming/breeding items of Ocelots.",
+
+  "tameable-ocelots.config.convertToCat": "Convert to a tamed Cat",
+  "tameable-ocelots.config.convertToCat.desc": "If true, it'll change the taming behavior back to the old Minecraft versions of taming ocelots."
+}

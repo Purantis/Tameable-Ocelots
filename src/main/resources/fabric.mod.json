@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "tameable-ocelots",
+	"version": "${version}",
+	"name": "Tameable Ocelots",
+	"description": "A mod that makes ocelots tameable",
+	"authors": [
+		"Purantis"
+	],
+	"license": "MIT",
+	"icon": "assets/tameable-ocelots/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.purantis.tameableocelots.TameableOcelots"
+		]
+	},
+	"mixins": [
+		"tameable-ocelots.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*",
+		"fzzy_config": ">=0.6.9+1.20.1"
+	},
+	"custom": {
+		"fzzy_config": [
+			"tameable-ocelots"
+		],
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/RQ9cCyMr5Z"
+			}
+		}
+	}
+}

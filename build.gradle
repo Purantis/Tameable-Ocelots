@@ -28,10 +28,7 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
-}
-
-loom {
-	accessWidenerPath = file("src/main/resources/tameable-ocelots.accesswidener")
+	maven{ url = "https://maven.shedaniel.me/" }
 }
 
 dependencies {
@@ -42,9 +39,12 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "me.fzzyhmstrs:fzzy_config:${project.fzzyConfigVersion}"
 
-	modImplementation "maven.modrinth:not-enough-animations:1.9.3-1.20.1"
-	modImplementation "maven.modrinth:companion:5.3.0+fabric"
+	modImplementation "maven.modrinth:not-enough-animations:1.10.1-1.21"
+	modImplementation "maven.modrinth:companion:6.1.1+fabric"
+}
 
+loom {
+	accessWidenerPath = file("src/main/resources/tameable-ocelots.accesswidener")
 }
 
 processResources {
@@ -56,14 +56,14 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {

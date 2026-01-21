@@ -9,7 +9,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CatEntity;
-import net.minecraft.entity.passive.CatVariant;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -50,17 +49,17 @@ public abstract class OcelotEntityMixin extends AnimalEntity implements OcelotDa
         return this.isTrusting();
     }
 
+    // 1.21 Change: initDataTracker now takes a DataTracker.Builder
     @Inject(method = "initDataTracker", at = @At("TAIL"))
-    protected void initTameData(CallbackInfo ci) {
-        this.dataTracker.startTracking(SITTING, false);
-        this.dataTracker.startTracking(OWNER_UUID, Optional.empty());
+    protected void initTameData(DataTracker.Builder builder, CallbackInfo ci) {
+        builder.add(SITTING, false);
+        builder.add(OWNER_UUID, Optional.empty());
     }
 
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     private void handleTaming(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = player.getStackInHand(hand);
 
-        // We can now call isTrusting() directly because of the @Shadow
         if (TameableOcelotsConfig.OCELOT_TAMING_ITEMS.contains(itemStack.getItem()) && !this.isTrusting()) {
             if (!this.getWorld().isClient) {
                 if (!player.getAbilities().creativeMode) itemStack.decrement(1);
@@ -69,13 +68,13 @@ public abstract class OcelotEntityMixin extends AnimalEntity implements OcelotDa
                     if (TameableOcelotsConfig.config.convertToCat) {
                         this.convertToCat(player);
                     } else {
-                        this.setTrusting(true); // Shadowed
+                        this.setTrusting(true);
                         this.setOcelotOwnerUuid(player.getUuid());
-                        this.showEmoteParticle(true); // Shadowed
+                        this.showEmoteParticle(true);
                         this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_POSITIVE_PLAYER_REACTION_PARTICLES);
                     }
                 } else {
-                    this.showEmoteParticle(false); // Shadowed
+                    this.showEmoteParticle(false);
                     this.getWorld().sendEntityStatus(this, EntityStatuses.ADD_NEGATIVE_PLAYER_REACTION_PARTICLES);
                 }
             }
@@ -95,10 +94,12 @@ public abstract class OcelotEntityMixin extends AnimalEntity implements OcelotDa
         CatEntity catEntity = EntityType.CAT.create(this.getWorld());
         if (catEntity != null) {
             var registry = this.getWorld().getRegistryManager().get(RegistryKeys.CAT_VARIANT);
-            registry.getRandom(this.getWorld().getRandom()).ifPresent(v -> catEntity.setVariant(v.value()));
+
+            // v is an instance of RegistryEntry<CatVariant>
+            registry.getRandom(this.getWorld().getRandom()).ifPresent(v -> catEntity.setVariant(v));
 
             catEntity.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
-            catEntity.setTamed(true);
+            catEntity.setTamed(true, true);
             catEntity.setOwner(player);
             this.getWorld().spawnEntity(catEntity);
             this.discard();
